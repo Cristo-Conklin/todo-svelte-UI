@@ -13,12 +13,16 @@
 		};
 		new Toast(toastEl).show();
 	};
+
 </script>
 
 <div class="toast-container position-absolute top-0 end-0 p-3">
 	<div
 		bind:this={toastEl}
-		class="toast align-items-center text-dark bg-{opc.color}"
+		class="toast align-items-center text-dark"
+		class:bg-success={opc.color === "success"}
+		class:bg-danger={opc.color === "danger"}
+		class:bg-warning={opc.color === "warning"}
 		role="alert"
 		aria-live="assertive"
 		aria-atomic="true"

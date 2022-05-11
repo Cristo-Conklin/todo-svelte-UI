@@ -4,17 +4,13 @@
 	import TaskForm from "./components/TaskForm.svelte";
 	import TodoToast from "./components/TodoToast.svelte";
 	import { writable } from "svelte/store";
-	// localStorage:
-	// if (localStorage.getItem("todos")) {
-	// 	todos = JSON.parse(localStorage.getItem("todos"));
-	// }
 
-	// $: localStorage.setItem("todos", JSON.stringify(todos));
+	let todos = writable(JSON.parse(localStorage.getItem("storeTodos")) || []);
+	$: localStorage.setItem("storeTodos", JSON.stringify($todos));
 
-	$: todos = writable([]);
-
-	export let mostrarMensaje, toastEl = '', opc;
-
+	export let mostrarMensaje,
+		toastEl = "",
+		opc;
 </script>
 
 <main>

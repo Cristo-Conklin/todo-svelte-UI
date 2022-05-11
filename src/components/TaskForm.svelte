@@ -4,15 +4,15 @@
 	let todo = { id: "", texto: "", estado: false };
 
 	// crud methods
-	$: addTodos = () => {
+	const addTodos = () => {
 		if (!todo.texto.trim()) {
 			console.log("texto vacio");
 			todo.texto = "";
 			return;
 		}
 		todo.id = Date.now();
-		// $todos.push(todo);
-		todos.update(t => [...t, todo]);
+		$todos = [...$todos, todo];
+		//todos.update(t => [...t, todo]);
 
 		todo = { id: "", texto: "", estado: false };
 
