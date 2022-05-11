@@ -1,15 +1,15 @@
 <script>
-	export let todos = [],
+	export let todos,
 		mostrarMensaje;
 		
 	// crud methods
 	$: delTodos = (id) => {
-		todos = todos.filter((item) => item.id !== id);
+		$todos = $todos.filter((item) => item.id !== id);
 		mostrarMensaje("Todo eliminado", "danger");
 	};
 
 	$: updateTodos = (id) => {
-		todos = todos.map((item) =>
+		$todos = $todos.map((item) =>
 			item.id === id ? { ...item, estado: !item.estado } : item
 		);
 		mostrarMensaje("Todo actualizado", "warning");
@@ -27,7 +27,7 @@
 
 </script>
 
-		{#each todos as item}
+		{#each $todos as item}
 			<div class="shadow my-3 p-3 lead bg-warning">
 				<p class={classTextoTachado(item.estado)}>
 					{item.texto}

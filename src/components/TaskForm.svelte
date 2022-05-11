@@ -1,5 +1,5 @@
 <script>
-	export let todos = [],
+	export let todos,
 		mostrarMensaje;
 	let todo = { id: "", texto: "", estado: false };
 
@@ -11,11 +11,13 @@
 			return;
 		}
 		todo.id = Date.now();
-		todos = [...todos, todo];
+		// $todos.push(todo);
+		todos.update(t => [...t, todo]);
+
 		todo = { id: "", texto: "", estado: false };
 
 		// recent todos first
-		todos.sort(function (a, b) {
+		$todos.sort(function (a, b) {
 			// Turn your strings into dates, and then subtract them
 			// to get a value that is either negative, positive, or zero.
 			return new Date(b.id) - new Date(a.id);
@@ -23,6 +25,7 @@
 
 		mostrarMensaje("Todo añadido", "success");
 
+		console.log($todos);
 		// todos = todos
 	};
 </script>

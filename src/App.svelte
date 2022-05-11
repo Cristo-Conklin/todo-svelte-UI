@@ -3,15 +3,18 @@
 	import TaskList from "./components/TaskList.svelte";
 	import TaskForm from "./components/TaskForm.svelte";
 	import TodoToast from "./components/TodoToast.svelte";
-
-	let todos = [], mostrarMensaje;
-
+	import { writable } from "svelte/store";
 	// localStorage:
-	if (localStorage.getItem("todos")) {
-		todos = JSON.parse(localStorage.getItem("todos"));
-	}
+	// if (localStorage.getItem("todos")) {
+	// 	todos = JSON.parse(localStorage.getItem("todos"));
+	// }
 
-	$: localStorage.setItem("todos", JSON.stringify(todos));
+	// $: localStorage.setItem("todos", JSON.stringify(todos));
+
+	$: todos = writable([]);
+
+	export let mostrarMensaje, toastEl = '', opc;
+
 </script>
 
 <main>
@@ -29,7 +32,7 @@
 		<TaskList bind:todos {mostrarMensaje} />
 
 		<!-- Toast notify -->
-		<TodoToast bind:mostrarMensaje />
+		<TodoToast bind:toastEl bind:mostrarMensaje bind:opc />
 	</div>
 </main>
 
