@@ -1,13 +1,14 @@
 <script>
-	// crud methods and toast are in components
+	import {todos} from "./store";
+	import TodoToast from "./components/TodoToast.svelte";
 	import TaskList from "./components/TaskList.svelte";
 	import TaskForm from "./components/TaskForm.svelte";
-	import TodoToast from "./components/TodoToast.svelte";
-	import todos from "./store";
 
-	export let mostrarMensaje,
-		toastEl = "",
-		opc;
+	let toast
+
+	$: console.log(todos, $todos);
+	$: localStorage.setItem("storeTodos", JSON.stringify($todos));
+
 </script>
 
 <main>
@@ -17,15 +18,16 @@
 		<hr />
 
 		<!-- TaskForm.svelteS -->
-		<TaskForm bind:todos={$todos} {mostrarMensaje} />
-
+		<TaskForm {toast} /> 
+		
 		<hr />
 
 		<!-- TaskList.svelte -->
-		<TaskList bind:todos={$todos} {mostrarMensaje} />
+		<TaskList {toast} />
 
-		<!-- Toast notify -->
-		<TodoToast bind:toastEl bind:mostrarMensaje bind:opc />
+
+		<!-- TodoToast notify -->
+		<TodoToast bind:toast />
 	</div>
 </main>
 
