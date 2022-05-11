@@ -2,18 +2,16 @@
 	// toast notify
 	import { Toast } from "bootstrap";
 
-	let opc = { text: "", color: "" }
-
 	export let toast = {
 		el: "",
-		
+		opc: { text: "", color: "" },
 		mostrarMensaje: (text, color) => {
-			opc= {text, color}
-			new Toast(toast.el, opc).show();
+			toast.opc= {text, color}
+			new Toast(toast.el, toast.opc).show();
 		},
 	};
 
-	$: classToast = opc.color ? "show bg-" + opc.color : ""
+	$: classToast = toast.opc.color ? "show bg-" + toast.opc.color : ""
 </script>
 
 <div class="toast-container position-absolute top-0 end-0 p-3">
@@ -25,7 +23,7 @@
 		aria-atomic="true"
 	>
 		<div class="d-flex">
-			<div class="toast-body">{opc.text}</div>
+			<div class="toast-body">{toast.opc.text}</div>
 			<button
 				type="button"
 				class="btn-close me-2 m-auto"

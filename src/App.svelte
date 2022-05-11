@@ -6,7 +6,7 @@
 
 	let toast
 
-	$: console.log(todos, $todos);
+	// $: console.log(todos, $todos);
 	$: localStorage.setItem("storeTodos", JSON.stringify($todos));
 
 </script>

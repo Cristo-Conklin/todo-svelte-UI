@@ -19,8 +19,6 @@
 		todo = { id: "", texto: "", estado: false };
 
 		toast.mostrarMensaje("Todo añadido", "success");
-
-		console.log($todos);
 	};
 </script>
 
@@ -42,6 +40,3 @@
 		</div>
 	</div>
 </form>
-
-<style>
-</style>
