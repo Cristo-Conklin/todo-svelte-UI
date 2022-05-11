@@ -3,10 +3,7 @@
 	import TaskList from "./components/TaskList.svelte";
 	import TaskForm from "./components/TaskForm.svelte";
 	import TodoToast from "./components/TodoToast.svelte";
-	import { writable } from "svelte/store";
-
-	let todos = writable(JSON.parse(localStorage.getItem("storeTodos")) || []);
-	$: localStorage.setItem("storeTodos", JSON.stringify($todos));
+	import todos from "./store";
 
 	export let mostrarMensaje,
 		toastEl = "",
@@ -19,13 +16,13 @@
 
 		<hr />
 
-		<!-- TaskForm.svelte -->
-		<TaskForm bind:todos {mostrarMensaje} />
+		<!-- TaskForm.svelteS -->
+		<TaskForm bind:todos={$todos} {mostrarMensaje} />
 
 		<hr />
 
 		<!-- TaskList.svelte -->
-		<TaskList bind:todos {mostrarMensaje} />
+		<TaskList bind:todos={$todos} {mostrarMensaje} />
 
 		<!-- Toast notify -->
 		<TodoToast bind:toastEl bind:mostrarMensaje bind:opc />
