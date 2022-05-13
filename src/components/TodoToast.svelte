@@ -7,7 +7,7 @@
 		opc: { text: "", color: "" },
 		mostrarMensaje: (text, color) => {
 			toast.opc = {text, color}
-			new Toast(toast.el, toast.opc).show()
+			new Toast(toast.el, {text, color}).show()
 		},
 	}
 
