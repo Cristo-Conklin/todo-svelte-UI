@@ -1,27 +1,28 @@
 <script>
-    import { user } from "../stores/user";
-    import { navigate } from "svelte-routing";
+    import { user } from "../stores/user"
+    import { navigate } from "svelte-routing"
 
     let email = "",
-        password = "";
+        password = ""
 
     const procesarFormulario = () => {
         if (!email.trim() || !password.trim()) {
-            console.log("campos vacios"); alert("campos vacios")
-            return;
+            console.log("campos vacios")
+            alert("campos vacios")
+            return
         }
 
         user.set({
             displayName: email,
             uid: Date.now(),
-        });
+        })
 
-        email = "";
-        password = "";
+        email = ""
+        password = ""
 
-        console.log($user);
-        navigate("/login", { replace: true });
-    };
+        console.log($user)
+        navigate("/login", { replace: true })
+    }
 
     const cerrarSesion = () => {
         user.set(null)

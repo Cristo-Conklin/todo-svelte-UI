@@ -1,49 +1,50 @@
 <script>
-	export let toast;
+	export let toast
 
-	import { todos } from "../stores/todo";
+	import { todos } from "../stores/todo"
 
 	let showInput = false,
-		editID = -1;
+		editID = -1
 	
 	// crud methods
 	const delTodos = (id) => {
-		todos.delete(id);
-		toast.mostrarMensaje("Todo eliminado", "danger");
-	};
+		todos.delete(id)
+		toast.mostrarMensaje("Todo eliminado", "danger")
+	}
 	
 	const updateTodoState = (item) => {
-		item.estado = !item.estado;
-		todos.update(item);
-		toast.mostrarMensaje("Estado del Todo actualizado", "warning");
-	};
+		item.estado = !item.estado
+		todos.update(item)
+		toast.mostrarMensaje("Estado del Todo actualizado", "warning")
+	}
 	// auto binded, updates values
 	const updateTodoDescription = () => {
-		showInput = false;
-		editID = -1;
+		showInput = false
+		editID = -1
 
-		toast.mostrarMensaje("Todo actualizado", "warning");
-	};	
+		toast.mostrarMensaje("Todo actualizado", "warning")
+	}	
 	const showInputTodoDescription = (item) => {
-		showInput = true;
-		editID = item.id;
-	};
+		showInput = true
+		editID = item.id
+	}
 
 	// computed:
 	$: classEstado = (done) =>
 		done
 			? "btn btn-sm bg-black text-warning"
-			: "btn btn-sm font-weight-bold btn-outline-warning border-dark text-dark";
+			: "btn btn-sm font-weight-bold btn-outline-warning border-dark text-dark"
 	$: classIcono = (done) =>
-		done ? "bi bi-arrow-clockwise" : "bi bi-check2";
+		done ? "bi bi-arrow-clockwise" : "bi bi-check2"
 	$: classTextoTachado = (done) =>
-		done ? "text-decoration-line-through text-black-50 small" : "";
+		done ? "text-decoration-line-through text-black-50 small" : ""
 </script>
 
 {#each $todos as item}
 	<div class="shadow my-3 p-3 lead bg-warning">
 		{#if showInput && item.id == editID}
 			<form on:submit|preventDefault={updateTodoDescription(item)}>
+				<!-- svelte-ignore a11y-autofocus -->
 				<input
 					type="text"
 					autofocus

@@ -1,15 +1,15 @@
 <script>
 	// toast notify
-	import { Toast } from "bootstrap";
+	import { Toast } from "bootstrap"
 
 	export let toast = {
 		el: "",
 		opc: { text: "", color: "" },
 		mostrarMensaje: (text, color) => {
 			toast.opc = {text, color}
-			new Toast(toast.el, toast.opc).show();
+			new Toast(toast.el, toast.opc).show()
 		},
-	};
+	}
 
 	$: classToast = toast.opc.color ? "show bg-" + toast.opc.color : ""
 </script>

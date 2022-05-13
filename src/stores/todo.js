@@ -1,6 +1,6 @@
 import {
     writable
-} from "svelte/store";
+} from "svelte/store"
 
 const createTodos = () => {
     const {
@@ -15,7 +15,7 @@ const createTodos = () => {
             set(todos)
         },
         addTodo: (todo) => {
-            todo.id = Date.now();
+            todo.id = Date.now()
             update(todos => todos = [...todos, todo])
 
             // recent todos first

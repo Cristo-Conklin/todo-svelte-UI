@@ -1,22 +1,22 @@
 <script>
-	import { todos } from "../stores/todo";
+	import { todos } from "../stores/todo"
 
-	export let toast;
-	let todo = { id: "", texto: "", estado: false };
+	export let toast
+	let todo = { id: "", texto: "", estado: false }
 
 	const addTodos = () => {
 		if (!todo.texto.trim()) {
-			toast.mostrarMensaje("Texto vacio", "danger");
-			todo.texto = "";
-			return;
+			toast.mostrarMensaje("Texto vacio", "danger")
+			todo.texto = ""
+			return
 		}
 
-		todos.addTodo(todo);
+		todos.addTodo(todo)
 
-		todo = { id: "", texto: "", estado: false };
+		todo = { id: "", texto: "", estado: false }
 
-		toast.mostrarMensaje("Todo añadido", "success");
-	};
+		toast.mostrarMensaje("Todo añadido", "success")
+	}
 </script>
 
 <form on:submit|preventDefault={addTodos}>
