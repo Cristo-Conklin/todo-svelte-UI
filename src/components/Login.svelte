@@ -38,7 +38,7 @@
 
                 email = "";
                 password = "";
-
+                toast.mostrarMensaje("User created", "success");
                 navigate("/todos", { replace: true });
             })
             .catch((error) => {
