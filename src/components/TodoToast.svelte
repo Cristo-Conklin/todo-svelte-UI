@@ -1,34 +1,29 @@
 <script>
-	export let toastEl,
-		opc = { text: "", color: "" },
-		mostrarMensaje;
-
 	// toast notify
-	import { Toast } from "bootstrap";
+	import { Toast } from "bootstrap"
 
-	mostrarMensaje = (text, color) => {
-		opc = {
-			text: text,
-			color: color,
-		};
-		new Toast(toastEl).show();
-	};
+	export let toast = {
+		el: "",
+		opc: { text: "", color: "" },
+		mostrarMensaje: (text, color) => {
+			toast.opc = {text, color}
+			new Toast(toast.el, {text, color}).show()
+		},
+	}
 
+	$: classToast = toast.opc.color ? "show bg-" + toast.opc.color : ""
 </script>
 
 <div class="toast-container position-absolute top-0 end-0 p-3">
 	<div
-		bind:this={toastEl}
-		class="toast align-items-center text-dark"
-		class:bg-success={opc.color === "success"}
-		class:bg-danger={opc.color === "danger"}
-		class:bg-warning={opc.color === "warning"}
+		bind:this={toast.el}
+		class="toast align-items-center text-dark {classToast}"
 		role="alert"
 		aria-live="assertive"
 		aria-atomic="true"
 	>
 		<div class="d-flex">
-			<div class="toast-body">{opc.text}</div>
+			<div class="toast-body">{toast.opc.text}</div>
 			<button
 				type="button"
 				class="btn-close me-2 m-auto"

@@ -1,33 +1,22 @@
 <script>
-	export let todos,
-		mostrarMensaje;
-	let todo = { id: "", texto: "", estado: false };
+	import { todos } from "../stores/todo"
 
-	// crud methods
+	export let toast
+	let todo = { id: "", texto: "", estado: false }
+
 	const addTodos = () => {
 		if (!todo.texto.trim()) {
-			console.log("texto vacio");
-			todo.texto = "";
-			return;
+			toast.mostrarMensaje("Texto vacio", "danger")
+			todo.texto = ""
+			return
 		}
-		todo.id = Date.now();
-		$todos = [...$todos, todo];
-		//todos.update(t => [...t, todo]);
 
-		todo = { id: "", texto: "", estado: false };
+		todos.addTodo(todo)
 
-		// recent todos first
-		$todos.sort(function (a, b) {
-			// Turn your strings into dates, and then subtract them
-			// to get a value that is either negative, positive, or zero.
-			return new Date(b.id) - new Date(a.id);
-		});
+		todo = { id: "", texto: "", estado: false }
 
-		mostrarMensaje("Todo añadido", "success");
-
-		console.log($todos);
-		// todos = todos
-	};
+		toast.mostrarMensaje("Todo añadido", "success")
+	}
 </script>
 
 <form on:submit|preventDefault={addTodos}>
@@ -48,6 +37,3 @@
 		</div>
 	</div>
 </form>
-
-<style>
-</style>

@@ -1,34 +1,49 @@
 <script>
-	// crud methods and toast are in components
-	import TaskList from "./components/TaskList.svelte";
-	import TaskForm from "./components/TaskForm.svelte";
+	import Todos from "./components/Todos.svelte";
+	import Login from "./components/Login.svelte";
+	import { Router, Link, Route } from "svelte-routing";
+	import { user } from "./stores/user";
 	import TodoToast from "./components/TodoToast.svelte";
-	import { writable } from "svelte/store";
+	import NotFound from "./components/__error.svelte";
 
-	let todos = writable(JSON.parse(localStorage.getItem("storeTodos")) || []);
-	$: localStorage.setItem("storeTodos", JSON.stringify($todos));
 
-	export let mostrarMensaje,
-		toastEl = "",
-		opc;
+	let toast;
 </script>
 
 <main>
 	<div class="container">
 		<h1 class="my-3 display-6 text-warning text-center fst-italic">TODO</h1>
 
-		<hr />
+		<!-- TodoToast notify -->
+		<TodoToast bind:toast />
 
-		<!-- TaskForm.svelte -->
-		<TaskForm bind:todos {mostrarMensaje} />
+		<Router>
+			<nav class="navbar">
+				<div class="container-fluid">
+					<Link to="/">Home</Link>
+					{#if $user}<Link class="ms-auto mx-2" to="/todos"
+							>Dashboard</Link
+						>{/if}
+					<Link class="" to="/login"
+						>{$user ? "Logout" : "Login"}</Link
+					>
+				</div>
+			</nav>
 
-		<hr />
+			<hr />
 
-		<!-- TaskList.svelte -->
-		<TaskList bind:todos {mostrarMensaje} />
-
-		<!-- Toast notify -->
-		<TodoToast bind:toastEl bind:mostrarMensaje bind:opc />
+			<Route path="/">
+				Welcome <hr />
+				<Login {toast}/>
+			</Route>
+			<Route path="/login">
+				<Login {toast}/>
+			</Route>
+			<Route path="/todos">
+				<Todos {toast} />
+			</Route>
+			<!-- <Route component={NotFound} /> -->
+		</Router>
 	</div>
 </main>
 
