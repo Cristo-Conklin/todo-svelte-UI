@@ -18,6 +18,7 @@
 
 	// console.log(todos, $todos);
 	$: localStorage.setItem("storeTodos", JSON.stringify($todos));
+	$: localStorage.setItem("userTodos", JSON.stringify($user));
 </script>
 
 <div>

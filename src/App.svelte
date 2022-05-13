@@ -1,8 +1,8 @@
 <script>
 	import Todos from "./components/Todos.svelte";
 	import Login from "./components/Login.svelte";
-
 	import { Router, Link, Route } from "svelte-routing";
+    import { user } from "./stores/user";
 </script>
 
 <main>
@@ -12,8 +12,8 @@
 		<Router>
 			<nav>
 				<Link to="/">Home</Link>
-				<Link to="/login">Login</Link>
-				<Link to="/todos">Dashboard</Link>
+				<Link to="/login">{ $user ? 'Logout' : 'Login'}</Link>
+				{#if $user}<Link to="/todos">Dashboard</Link>{/if}
 			</nav>
 
 			<hr />

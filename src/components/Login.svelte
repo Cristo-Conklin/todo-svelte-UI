@@ -11,7 +11,7 @@
             return;
         }
 
-        user.setUser({
+        user.set({
             displayName: email,
             uid: Date.now(),
         });
@@ -24,7 +24,7 @@
     };
 
     const cerrarSesion = () => {
-        user.setUser(null)
+        user.set(null)
         navigate('/', { replace: true })
     }
 

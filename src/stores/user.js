@@ -5,10 +5,18 @@ const createUser = () => {
 
     return {
         subscribe,
-        setUser: (user) => {
+        set: (user) => {
             set(user)
-        }
+        },
+
+        getLocalStorage: () => {
+            return (JSON.parse(localStorage.getItem("userTodos")))
+        },
     }
 }
 
 export const user = createUser()
+
+if (localStorage.getItem("userTodos")) {
+    user.set(user.getLocalStorage())
+}
