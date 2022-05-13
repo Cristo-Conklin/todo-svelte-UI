@@ -1,20 +1,17 @@
 <script>
-	  import { todos } from "../store";
+	import { todos } from "../stores/todo";
 
-	export let toast
+	export let toast;
 	let todo = { id: "", texto: "", estado: false };
 
-	// crud methods
 	const addTodos = () => {
 		if (!todo.texto.trim()) {
-			console.log("texto vacio");
 			toast.mostrarMensaje("Texto vacio", "danger");
 			todo.texto = "";
 			return;
 		}
 
-		console.log("todos from taskform");
-		todos.addTodo(todo)
+		todos.addTodo(todo);
 
 		todo = { id: "", texto: "", estado: false };
 

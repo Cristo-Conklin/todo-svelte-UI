@@ -7,8 +7,6 @@ const createTodos = () => {
         subscribe,
         set,
         update,
-
-
     } = writable([])
 
     return {
@@ -27,7 +25,9 @@ const createTodos = () => {
         },
 
         delete: id => {
-            update(todos => todos = todos.filter((item) => item.id !== id))
+            update(todos => 
+                todos = todos.filter((item) => item.id !== id)
+                )
         },
         update: id => {
             update(todos =>

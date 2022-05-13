@@ -1,7 +1,7 @@
 <script>
 	export let toast
 
-	import {todos} from '../store'
+	import {todos} from '../stores/todo'
 
 	// crud methods
 	const delTodos = (id) => {

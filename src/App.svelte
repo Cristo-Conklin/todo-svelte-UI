@@ -1,33 +1,34 @@
 <script>
-	import {todos} from "./store";
-	import TodoToast from "./components/TodoToast.svelte";
-	import TaskList from "./components/TaskList.svelte";
-	import TaskForm from "./components/TaskForm.svelte";
+	import Todos from "./components/Todos.svelte";
+	import Login from "./components/Login.svelte";
 
-	let toast
-
-	// $: console.log(todos, $todos);
-	$: localStorage.setItem("storeTodos", JSON.stringify($todos));
-
+	import { Router, Link, Route } from "svelte-routing";
 </script>
 
 <main>
 	<div class="container">
 		<h1 class="my-3 display-6 text-warning text-center fst-italic">TODO</h1>
 
-		<hr />
+		<Router>
+			<nav>
+				<Link to="/">Home</Link>
+				<Link to="/login">Login</Link>
+				<Link to="/todos">Dashboard</Link>
+			</nav>
 
-		<!-- TaskForm.svelteS -->
-		<TaskForm {toast} /> 
-		
-		<hr />
+			<hr />
 
-		<!-- TaskList.svelte -->
-		<TaskList {toast} />
-
-
-		<!-- TodoToast notify -->
-		<TodoToast bind:toast />
+			<Route path="/">
+				Welcome <hr>
+				<Login />
+			</Route>
+			<Route path="/login">
+				<Login />
+			</Route>
+			<Route path="/todos">
+				<Todos />
+			</Route>
+		</Router>
 	</div>
 </main>
 
