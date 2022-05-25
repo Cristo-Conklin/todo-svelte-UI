@@ -5,7 +5,7 @@
 	export let toast = {
 		el: "",
 		opc: { text: "", color: "" },
-		mostrarMensaje: (text, color) => {
+		showMessage: (text, color) => {
 			toast.opc = {text, color}
 			new Toast(toast.el, {text, color}).show()
 		},
@@ -14,7 +14,7 @@
 	$: classToast = toast.opc.color ? "show bg-" + toast.opc.color : ""
 </script>
 
-<div class="toast-container position-absolute top-0 end-0 p-3">
+<div class="toast-container position-fixed border-2 top-0 end-0 p-3">
 	<div
 		bind:this={toast.el}
 		class="toast align-items-center text-dark {classToast}"

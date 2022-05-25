@@ -2,3 +2,8 @@
 
 @import url('https://fonts.googleapis.com/css?family=Macondo Swash Caps&display=swap');
 
+[data-input][type="number"]::-webkit-outer-spin-button {  
+    -webkit-appearance: textfield;
+     -moz-appearance: textfield;
+     appearance: textfield;
+ }

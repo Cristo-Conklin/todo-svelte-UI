@@ -1,13 +1,12 @@
 <script>
-	import Todos from "./components/Todos.svelte";
-	import Login from "./components/Login.svelte";
-	import { Router, Link, Route } from "svelte-routing";
-	import { user } from "./stores/user";
-	import TodoToast from "./components/TodoToast.svelte";
-	import NotFound from "./components/__error.svelte";
+	import Todos from "./components/Todos.svelte"
+	import Login from "./components/Login.svelte"
+	import { Router, Link, Route } from "svelte-routing"
+	import { user } from "./stores/user"
+	import TodoToast from "./components/TodoToast.svelte"
+	import NotFound from "./components/__error.svelte"
 
-
-	let toast;
+	let toast
 </script>
 
 <main>
@@ -21,11 +20,12 @@
 			<nav class="navbar">
 				<div class="container-fluid">
 					<Link to="/">Home</Link>
-					{#if $user}<Link class="ms-auto mx-2" to="/todos"
-							>Dashboard</Link
-						>{/if}
-					<Link class="" to="/login"
-						>{$user ? "Logout" : "Login"}</Link
+					{#if $user}
+						<Link class="ms-auto mx-2" to="/todos">Dashboard</Link>
+					{/if}
+					<Link class="" to="/login">
+						{$user ? "Logout" : "Login"}
+					</Link
 					>
 				</div>
 			</nav>
@@ -34,15 +34,15 @@
 
 			<Route path="/">
 				Welcome <hr />
-				<Login {toast}/>
+				<Login {toast} />
 			</Route>
 			<Route path="/login">
-				<Login {toast}/>
+				<Login {toast} />
 			</Route>
 			<Route path="/todos">
 				<Todos {toast} />
 			</Route>
-			<!-- <Route component={NotFound} /> -->
+			<Route component={NotFound} />
 		</Router>
 	</div>
 </main>

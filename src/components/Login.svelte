@@ -1,114 +1,114 @@
 <script>
-    import { user, auth } from "../stores/user";
+    import { user, auth } from "../stores/user"
     import {
         getAuth,
         signOut,
         signInWithEmailAndPassword,
         createUserWithEmailAndPassword,
-    } from "firebase/auth";
-    import { navigate } from "svelte-routing";
+    } from "firebase/auth"
+    import { navigate } from "svelte-routing"
 
-    export let toast;
+    export let toast
 
     let email = "",
-        password = "";
+        password = ""
 
     const createUser = () => {
         // TODO extract validation as func
         if (!email.trim() || !password.trim()) {
-            console.log("campos vacios");
+            console.log("campos vacios")
             //alert("campos vacios")
-            toast.mostrarMensaje("input email and password", "danger");
-            return;
+            toast.showMessage("input email and password", "danger")
+            return
         }
 
-        console.log($user);
+        console.log($user)
 
-        const auth = getAuth();
+        const auth = getAuth()
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 // Signed in // TODO: extract this part as func common w login
-                const authUser = userCredential.user;
-                console.log("create user:", authUser);
+                const authUser = userCredential.user
+                console.log("create user:", authUser)
 
                 user.set({
                     displayName: email,
                     uid: authUser.uid, //Date.now(),
-                });
+                })
 
-                email = "";
-                password = "";
-                toast.mostrarMensaje("User created", "success");
-                navigate("/todos", { replace: true });
+                email = ""
+                password = ""
+                toast.showMessage("User created", "success")
+                navigate("/todos", { replace: true })
             })
             .catch((error) => {
-                // const errorCode = error.code;
-                const errorMessage = error.message;
+                // const errorCode = error.code
+                const errorMessage = error.message
                 // let opt = {text: errorMessage, color: 'danger'}
-                //  console.log('toast', toast, error);
-                toast.mostrarMensaje(errorMessage, "danger");
+                //  console.log('toast', toast, error)
+                toast.showMessage(errorMessage, "danger")
                 // alert (error)
-            });
-    };
+            })
+    }
 
     const procesarFormulario = () => {
         if (!email.trim() || !password.trim()) {
-            console.log("campos vacios");
+            console.log("campos vacios")
             //alert("campos vacios")
-            toast.mostrarMensaje("input email and password", "danger");
-            return;
+            toast.showMessage("input email and password", "danger")
+            return
         }
 
-        console.log($user);
+        console.log($user)
 
-        const auth = getAuth();
+        const auth = getAuth()
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 // Signed in
-                const authUser = userCredential.user;
-                console.log("auth user:", authUser);
+                const authUser = userCredential.user
+                console.log("auth user:", authUser)
 
                 user.set({
                     displayName: email,
                     uid: authUser.uid, //Date.now(),
-                });
+                })
 
-                email = "";
-                password = "";
+                email = ""
+                password = ""
 
-                navigate("/todos", { replace: true });
+                navigate("/todos", { replace: true })
             })
             .catch((error) => {
-                // const errorCode = error.code;
-                const errorMessage = error.message;
+                // const errorCode = error.code
+                const errorMessage = error.message
                 // let opt = {text: errorMessage, color: 'danger'}
-                //  console.log('toast', toast, error);
-                toast.mostrarMensaje(errorMessage, "danger");
+                //  console.log('toast', toast, error)
+                toast.showMessage(errorMessage, "danger")
                 // alert (error)
-            });
-    };
+            })
+    }
 
     const cerrarSesion = () => {
-        // user.set(null);
-        // navigate("/", { replace: true });
+        // user.set(null)
+        // navigate("/", { replace: true })
         try {
-            const auth = getAuth();
+            const auth = getAuth()
             signOut(auth)
                 .then(() => {
-                    console.log("Sign-out successful.");
+                    console.log("Sign-out successful.")
                 })
                 .catch((error) => {
                     // An error happened.
-                    console.log("error while logging out", error);
-                });
+                    console.log("error while logging out", error)
+                })
         } catch (error) {
-            console.log(error);
+            console.log(error)
         } finally {
-            user.set(null);
-            localStorage.setItem("userTodos", JSON.stringify(null));
-            //navigate("/login", { replace: true });
+            user.set(null)
+            localStorage.setItem("userTodos", JSON.stringify(null))
+            //navigate("/login", { replace: true })
         }
-    };
+    }
 </script>
 
 <div>

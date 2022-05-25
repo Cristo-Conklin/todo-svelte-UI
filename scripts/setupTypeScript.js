@@ -3,7 +3,7 @@
 /** This script modifies the project to support TS code in .svelte files like:
 
   <script lang="ts">
-  	export let name: string;
+  	export let name: string
   </script>
  
   As well as validating the code for CI.
@@ -47,7 +47,7 @@ fs.renameSync(beforeMainJSPath, afterMainTSPath)
 const appSveltePath = path.join(projectRoot, "src", "App.svelte")
 let appFile = fs.readFileSync(appSveltePath, "utf8")
 appFile = appFile.replace("<script>", '<script lang="ts">')
-appFile = appFile.replace("export let name;", 'export let name: string;')
+appFile = appFile.replace("export let name", 'export let name: string')
 fs.writeFileSync(appSveltePath, appFile)
 
 // Edit rollup config
@@ -55,9 +55,9 @@ const rollupConfigPath = path.join(projectRoot, "rollup.config.js")
 let rollupConfig = fs.readFileSync(rollupConfigPath, "utf8")
 
 // Edit imports
-rollupConfig = rollupConfig.replace(`'rollup-plugin-terser';`, `'rollup-plugin-terser';
-import sveltePreprocess from 'svelte-preprocess';
-import typescript from '@rollup/plugin-typescript';`)
+rollupConfig = rollupConfig.replace(`'rollup-plugin-terser'`, `'rollup-plugin-terser'
+import sveltePreprocess from 'svelte-preprocess'
+import typescript from '@rollup/plugin-typescript'`)
 
 // Replace name of entry point
 rollupConfig = rollupConfig.replace(`'src/main.js'`, `'src/main.ts'`)
@@ -66,13 +66,13 @@ rollupConfig = rollupConfig.replace(`'src/main.js'`, `'src/main.ts'`)
 rollupConfig = rollupConfig.replace(
   'compilerOptions:',
   'preprocess: sveltePreprocess({ sourceMap: !production }),\n\t\t\tcompilerOptions:'
-);
+)
 
 // Add TypeScript
 rollupConfig = rollupConfig.replace(
   'commonjs(),',
   'commonjs(),\n\t\ttypescript({\n\t\t\tsourceMap: !production,\n\t\t\tinlineSources: !production\n\t\t}),'
-);
+)
 fs.writeFileSync(rollupConfigPath, rollupConfig)
 
 // Add TSConfig

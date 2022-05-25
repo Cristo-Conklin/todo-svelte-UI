@@ -2,6 +2,7 @@ import {
     writable
 } from "svelte/store"
 
+
 const createTodos = () => {
     const {
         subscribe,
@@ -20,21 +21,44 @@ const createTodos = () => {
 
             // recent todos first
             update(todos => todos = todos.sort(function (a, b) {
-                return new Date(b.id) - new Date(a.id)
+                // return new Date(b.id) - new Date(a.id)
+                return b.sort_order > a.sort_order
+
             }))
         },
 
         delete: id => {
-            update(todos => 
+            update(todos =>
                 todos = todos.filter((item) => item.id !== id)
-                )
+            )
         },
-        update: id => {
+        update: () => {
+            update(todos => todos )
+
+            // update(todos =>
+            //     todos = todos.map((item) => {
+            //         item.id === id ?
+            //             item = {todo}
+            //             :
+            //             item
+            //     }))
+        },
+        updateState: id => { // THIS UPDATES done NOT THE TODO
             update(todos =>
                 todos = todos.map((item) =>
                     item.id === id ? {
                         ...item,
-                        estado: !item.estado
+                        done: !item.done
+                    } :
+                    item
+                ))
+        },
+        removeTag: (id, newTags) => { 
+            update(todos =>
+                todos = todos.map((item) =>
+                    item.id === id ? {
+                        ...item,
+                        tags: newTags
                     } :
                     item
                 ))
@@ -51,4 +75,3 @@ export const todos = createTodos()
 if (localStorage.getItem("storeTodos")) {
     todos.set(todos.getLocalStorage())
 }
-
