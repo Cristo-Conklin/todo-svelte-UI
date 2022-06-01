@@ -13,12 +13,6 @@
     tagToAdd = ''
 
   // TODO: extract js? and compos. ?also common w taskform
-  // DONE STATE SWITCH
-  const updateTodoState = (item) => {
-    item.done = !item.done
-    todos.updateState(item)
-    toast.showMessage('Estado del Todo actualizado', 'warning')
-  }
   // crud TITLE DESCRIPTION
   const delTodos = (id) => {
     todos.delete(id)
@@ -41,6 +35,14 @@
 
     var textarea = document.getElementById(`textarea-${item.id}`)
     textarea.scrollHeight = auto
+  }
+
+  // TODO: Extract noteBottom js to compo
+  // DONE STATE SWITCH
+  const updateTodoState = (item) => {
+    item.done = !item.done
+    todos.updateState(item)
+    toast.showMessage('Estado del Todo actualizado', 'warning')
   }
   // TAGS
   function showAddTag(id) {
@@ -183,34 +185,56 @@
       {/if}
     </div>
 
-    <!-- note bottom buttons -->
+    <!-- note bottom buttons . TODO: Extract compo TLEachNoteBottom-->
     <div class="row">
       <!-- actions buttons -->
       <button
         on:click={updateTodoState(item)}
         class="{classdone(item.done)} col-auto my-auto"
+        title="mark as done"
       >
         <i class={classIcono(item.done)} />
-      </button>
-      <button
-        class="btn btn-sm btn-danger col-auto  my-auto"
-        on:click={delTodos(item.id)}
-      >
-        <i class="bi bi-trash" />
-      </button>
-      <button
-        on:click={showInputTodoDescription(item)}
-        class="btn btn-sm btn-info border-dark col-auto  my-auto"
-      >
-        <i class="bi bi-pencil" />
       </button>
 
       <!-- tag btn -->
       <button
         on:click={showAddTag(item.id)}
         class="btn btn-sm btn-secondary border-dark col-auto  my-auto"
+        title="add tag for the note"
       >
         <i class="bi bi-tags" />
+      </button>
+      <button
+        on:click={showInputTodoDescription(item)}
+        class="btn btn-sm btn-info border-dark col-auto  my-auto"
+        title="edit description and title"
+      >
+        <i class="bi bi-pencil" />
+      </button>
+
+      <!-- TODO: move delete button at right top like a close btn -->
+      <button
+        class="btn btn-sm btn-danger col-auto mx-3 my-auto"
+        on:click={delTodos(item.id)}
+        title="delete this note"
+      >
+        <i class="bi bi-trash" />
+      </button>
+      <!-- links btn -->
+      <button
+        class="btn btn-sm btn-primary border-dark col-auto  my-auto"
+        title="links for this note"
+        on:click={showLinks(item)}
+      >
+        <i class="bi bi-link-45deg" />
+      </button>
+      <!-- media btn -->
+      <button
+        class="btn btn-sm btn-success border-dark col-auto  my-auto"
+        title="media for this note"
+        on:click={showMedia(item)}
+      >
+        <i class="bi bi-film" />
       </button>
 
       <!-- public switch checkbox -->

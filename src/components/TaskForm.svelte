@@ -22,8 +22,10 @@
     tags: [],
     // for adv tags classify
     // notebook: [], // ##
-    // category[], // ###
-    // persona[] // ####
+    // category: [], // ###
+    // persona: [], // ####
+
+    // important: false, urgent: false,
   }
   todo = { ...blank_todo }
 
