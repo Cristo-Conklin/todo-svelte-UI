@@ -43,11 +43,7 @@
             })
             .catch((error) => {
                 // const errorCode = error.code
-                const errorMessage = error.message
-                // let opt = {text: errorMessage, color: 'danger'}
-                //  console.log('toast', toast, error)
-                toast.showMessage(errorMessage, "danger")
-                // alert (error)
+                toast.showMessage(error.message, "danger")
             })
     }
 
@@ -80,11 +76,7 @@
             })
             .catch((error) => {
                 // const errorCode = error.code
-                const errorMessage = error.message
-                // let opt = {text: errorMessage, color: 'danger'}
-                //  console.log('toast', toast, error)
-                toast.showMessage(errorMessage, "danger")
-                // alert (error)
+                toast.showMessage(error.message, "danger")
             })
     }
 
