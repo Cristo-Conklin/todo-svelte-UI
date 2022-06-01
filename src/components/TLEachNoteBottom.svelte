@@ -1,12 +1,8 @@
 <script>
-  export let toast
-  export let item
+  export let toast, item
+  export let showAddTag, showInputTodo
 
   import { todos } from '../stores/todo'
-
-  import _ from 'lodash'
-
-  export let showAddTag, showInputTodoDescription
 
   // crud TITLE DESCRIPTION
   const delTodos = (id) => {
@@ -72,7 +68,7 @@
     <i class="bi bi-tags" />
   </button>
   <button
-    on:click={showInputTodoDescription(item)}
+    on:click={showInputTodo(item)}
     class="btn btn-sm btn-info border-dark col-auto  my-auto"
     title="edit description and title"
   >

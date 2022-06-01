@@ -24,7 +24,7 @@
   }
 </script>
 
-<div>
+<div class="my-3">
   {#each item.tags as tag}
     <span class="m-1 badge rounded-pill bg-secondary"
       >#{tag}&nbsp
